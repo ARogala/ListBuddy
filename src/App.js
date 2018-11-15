@@ -24,6 +24,20 @@ class App extends React.Component {
     this.setState({inputItemText: inputItemText});
   }
 
+  clearInputText() {
+    this.setState({inputItemText: ''});
+  }
+
+  saveListItem() {
+    const listItems = this.state.listItems;
+    const item = this.state.inputItemText.trim();
+    if(item.length !== 0) {
+
+      listItems.push(item);
+      console.log(listItems);
+    }
+  }
+
   render() {
     return (
       <div className="App">
@@ -41,8 +55,12 @@ class App extends React.Component {
             inputItemText={this.state.inputItemText}
             handleInputItemTextChange={(inputItemText) =>
               this.handleInputItemTextChange(inputItemText)}
+            clearInputText={() => this.clearInputText()}
+            saveListItem={() => this.saveListItem()}
           />
-          <List />
+          <List
+            listItems={this.state.listItems}
+          />
         </section>
 
 

@@ -16,9 +16,14 @@ class App extends React.Component {
     super(props);
     this.state = {
       listItems: JSON.parse(localStorage.getItem('listItems') || '[]'),
-      listItemText: ''
+      inputItemText: ''
     };
   }
+
+  handleInputItemTextChange(inputItemText) {
+    this.setState({inputItemText: inputItemText});
+  }
+
   render() {
     return (
       <div className="App">
@@ -32,7 +37,11 @@ class App extends React.Component {
         </header>
 
         <section className="list">
-          <InputListItem />
+          <InputListItem
+            inputItemText={this.state.inputItemText}
+            handleInputItemTextChange={(inputItemText) =>
+              this.handleInputItemTextChange(inputItemText)}
+          />
           <List />
         </section>
 

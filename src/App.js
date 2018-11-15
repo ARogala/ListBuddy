@@ -34,6 +34,7 @@ class App extends React.Component {
     if(item.length !== 0) {
 
       listItems.push(item);
+      this.setState({listItems: listItems})
       console.log(listItems);
     }
   }

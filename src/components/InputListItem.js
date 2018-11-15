@@ -30,9 +30,7 @@ class InputListItem extends React.Component {
 						Cancel
 					</button>
 				</div>
-
 			</div>
-
 		);
 	}
 }

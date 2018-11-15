@@ -10,7 +10,7 @@ class List extends React.Component {
 				<li key={index}>{item}</li>
 			);
 		});
-		console.log(items);
+		//console.log(items);
 		return (
 			<ul>
 				{items}

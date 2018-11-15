@@ -32,10 +32,18 @@ class App extends React.Component {
     const listItems = this.state.listItems;
     const item = this.state.inputItemText.trim();
     if(item.length !== 0) {
-
       listItems.push(item);
+      localStorage.setItem('listItems', JSON.stringify(listItems));
       this.setState({listItems: listItems})
       console.log(listItems);
+    }
+  }
+
+  deleteList() {
+    const result = window.confirm("Do you really want to delete your list?");
+    if(result === true) {
+      this.setState({listItems: []});
+      localStorage.removeItem('listItems');
     }
   }
 
@@ -62,6 +70,7 @@ class App extends React.Component {
           <List
             listItems={this.state.listItems}
           />
+          <button onClick={() => this.deleteList()}>Trash List</button>
         </section>
 
 

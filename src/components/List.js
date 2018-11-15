@@ -7,12 +7,15 @@ class List extends React.Component {
 		const listItems = this.props.listItems;
 		const items = listItems.map((item,index) => {
 			return(
-				<li key={index}>{item}</li>
+				<li key={index} className="list__item">
+					<input type="checkbox" id={`${item}${index}`}/>
+					<label htmlFor={`${item}${index}`}>{item}</label>
+				</li>
 			);
 		});
 		//console.log(items);
 		return (
-			<ul>
+			<ul className="list">
 				{items}
 			</ul>
 		);

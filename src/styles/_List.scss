@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.list {
+
+	&__item {
+
+	}
+	&__item input:checked ~ label {
+		text-decoration: line-through;
+		font-weight: normal;
+	}
+
+	&__item label {
+		font-weight: bold;
+	}
+}

@@ -17,6 +17,11 @@ class InputListItem extends React.Component {
 					placeholder="Enter a list item..."
 					value={inputItemText}
 					onChange={(e) => handleInputItemTextChange(e.target.value)}
+					onKeyPress={(e) => {
+						if(e.key === 'Enter') {
+							saveListItem();
+						}
+					}}
 				/>
 				<div className="input__btnbox">
 					<button

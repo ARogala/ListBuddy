@@ -35,6 +35,7 @@ class App extends React.Component {
       listItems.push(item);
       localStorage.setItem('listItems', JSON.stringify(listItems));
       this.setState({listItems: listItems})
+      this.setState({inputItemText: ''});
       console.log(listItems);
     }
   }

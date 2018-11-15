@@ -12,6 +12,13 @@ import LinkedIn from './img/linkedin.svg';
 
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      listItems: JSON.parse(localStorage.getItem('listItems') || '[]'),
+      listItemText: ''
+    };
+  }
   render() {
     return (
       <div className="App">

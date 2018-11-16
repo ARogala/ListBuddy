@@ -36,6 +36,7 @@ class ListTypeForm extends React.Component {
 						<select className="listTypeForm__select" id="template" value={this.state.template} onChange={(e)=> this.handleTemplateChange(e)}>
 							<option value="To Do">To Do</option>
 							<option value="Grocery">Grocery</option>
+							<option value="Travel">Travel</option>
 						</select>
 					</div>
 					<div className="listTypeForm__btnContainer">

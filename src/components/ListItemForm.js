@@ -6,7 +6,7 @@ class ListItemForm extends React.Component {
 		super(props);
 		this.state={
 			item: '',
-			itemCategory: '--Please Select a Category--'
+			itemCategory: '--Please Select an Item Category--'
 		};
 	}
 
@@ -27,11 +27,48 @@ class ListItemForm extends React.Component {
 	resetForm() {
 		this.setState({
 			item: '',
-			itemCategory: '--Please Select a Category--'
+			itemCategory: '--Please Select an Item Category--'
 		});
 	}
 
 	render() {
+		const template = this.props.template;
+		let select;
+		//console.log(template);
+		if(template === 'Grocery') {
+			select = (
+				<div>
+					<label htmlFor="category">Item Category:</label>
+					<select className="listForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)}>
+						<option value="--Please Select an Item Category--">--Please Select an Item Category--</option>
+						<option value="Produce">Produce</option>
+						<option value="Meat">Meat</option>
+						<option value="Dairy">Dairy</option>
+						<option value="Canned">Canned</option>
+						<option value="Frozen">Frozen</option>
+						<option value="Dry/Baking">Dry/Baking</option>
+					</select>
+				</div>
+ 			);
+		}
+		else if(template === 'Travel') {
+			select = (
+				<div>
+					<label htmlFor="category">Item Category:</label>
+					<select className="listForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)}>
+						<option value="--Please Select an Item Category--">--Please Select an Item Category--</option>
+						<option value="Clothes">Clothes</option>
+						<option value="Medicine/First Aid">Medicine/First Aid</option>
+						<option value="Technology">Technology</option>
+						<option value="Miscellaneous">Miscellaneous</option>
+						<option value="Camping/Hiking">Camping/Hiking</option>
+						<option value="Toiletry">Toiletry</option>
+						<option value="Food">Food</option>
+					</select>
+				</div>
+			);
+		}
+
 		return (
 			<form className="listForm" onSubmit={(e) => this.handleSubmit(e)}>
 				<fieldset>
@@ -48,18 +85,8 @@ class ListItemForm extends React.Component {
 							onChange={(e) => this.handleItemChange(e)}
 						/>
 					</div>
-					<div>
-						<label htmlFor="category">Item Category:</label>
-						<select className="listForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)}>
-							<option value="--Please Select a Category--">--Please Select a Category--</option>
-							<option value="Produce">Produce</option>
-							<option value="Meat">Meat</option>
-							<option value="Dairy">Dairy</option>
-							<option value="Canned">Canned</option>
-							<option value="Dry/Baking">Dry/Baking</option>
-						</select>
-					</div>
 
+					{select}
 					<div className="listForm__btnContainer">
 						<button
 							type="submit"
@@ -87,5 +114,6 @@ export default ListItemForm;
 
 ListItemForm.propTypes = {
   saveTemplateListItem: PropTypes.func.isRequired,
+  template: PropTypes.string.isRequired
 
 }

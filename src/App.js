@@ -20,7 +20,8 @@ class App extends React.Component {
     this.state = {
       listItems: JSON.parse(localStorage.getItem('listItems') || '[]'),
       inputItemText: '',
-      template: 'To Do'
+      template: 'To Do',
+      templateListItems: JSON.parse(localStorage.getItem('templateListItems') || '[]')
     };
   }
 
@@ -51,15 +52,29 @@ class App extends React.Component {
     }
   }
 
-  //templated lists here
+  //template lists here
   updateTemplate(template) {
-    console.log(template);
+    //console.log(template);
     this.setState({template: template});
   }
 
   saveTemplateListItem(item, category) {
     console.log(item);
-    console.log(category)
+    console.log(category);
+    console.log(this.state.template);
+    const templateListItems = this.state.templateListItems;
+    //push a new empty object on the templateListItems array
+    templateListItems.push({});
+
+    const newIndex = templateListItems.length - 1;
+    templateListItems[newIndex].item = item;
+    templateListItems[newIndex].category = category;
+    templateListItems[newIndex].checked = false;
+    templateListItems[newIndex].id = newIndex;
+    templateListItems[newIndex].template = this.state.template;
+
+    localStorage.setItem('templateListItems', JSON.stringify(templateListItems));
+    this.setState({templateListItems: templateListItems});
   }
 
 
@@ -100,7 +115,9 @@ class App extends React.Component {
               />
               <ListItemForm
                 saveTemplateListItem={(item, category)=> this.saveTemplateListItem(item,category)}
+                template={this.state.template}
               />
+
             </div>
           )}
 

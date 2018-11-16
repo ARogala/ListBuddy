@@ -5,6 +5,9 @@ import Navigation from './components/Navigation';
 import InputListItem from './components/InputListItem';
 import List from './components/List';
 
+import ListTypeForm from './components/ListTypeForm';
+import ListItemForm from './components/ListItemForm';
+
 import list from './list.svg';
 import GitHub from './img/github.svg';
 import LinkedIn from './img/linkedin.svg';
@@ -16,7 +19,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       listItems: JSON.parse(localStorage.getItem('listItems') || '[]'),
-      inputItemText: ''
+      inputItemText: '',
+      template: 'To Do'
     };
   }
 
@@ -47,6 +51,19 @@ class App extends React.Component {
     }
   }
 
+  //templated lists here
+  updateTemplate(template) {
+    console.log(template);
+    this.setState({template: template});
+  }
+
+  saveTemplateListItem(item, category) {
+    console.log(item);
+    console.log(category)
+  }
+
+
+
   render() {
     return (
       <div className="App">
@@ -59,20 +76,35 @@ class App extends React.Component {
           </div>
         </header>
 
-        <section className="list">
-          <InputListItem
-            inputItemText={this.state.inputItemText}
-            handleInputItemTextChange={(inputItemText) =>
-              this.handleInputItemTextChange(inputItemText)}
-            clearInputText={() => this.clearInputText()}
-            saveListItem={() => this.saveListItem()}
-          />
-          <List
-            listItems={this.state.listItems}
-          />
-          <button onClick={() => this.deleteList()}>Trash List</button>
-        </section>
+        <section>
+          {(this.state.template === 'To Do') ? (
+            <div>
+              <ListTypeForm
+                updateTemplate={(template) => this.updateTemplate(template)}
+              />
+              <InputListItem
+                inputItemText={this.state.inputItemText}
+                handleInputItemTextChange={(inputItemText)=>this.handleInputItemTextChange(inputItemText)}
+                clearInputText={()=>this.clearInputText()}
+                saveListItem={()=>this.saveListItem()}
+              />
+              <List
+                listItems={this.state.listItems}
+              />
+              <button onClick={() => this.deleteList()}>Trash List</button>
+            </div>
+          ):(
+            <div>
+              <ListTypeForm
+                updateTemplate={(template) => this.updateTemplate(template)}
+              />
+              <ListItemForm
+                saveTemplateListItem={(item, category)=> this.saveTemplateListItem(item,category)}
+              />
+            </div>
+          )}
 
+        </section>
 
         <footer className="footer">
           <div className="footer__container">

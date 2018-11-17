@@ -21,7 +21,7 @@ class App extends React.Component {
     this.state = {
       listItems: JSON.parse(localStorage.getItem('listItems') || '[]'),
       inputItemText: '',
-      template: 'To Do',
+      template: JSON.parse(localStorage.getItem('template') || '["To Do"]'),
       templateListItems: JSON.parse(localStorage.getItem('templateListItems') || '[]')
     };
   }
@@ -56,6 +56,7 @@ class App extends React.Component {
   //template lists here
   updateTemplate(template) {
     //console.log(template);
+    localStorage.setItem('template', JSON.stringify(template));
     this.setState({template: template});
   }
 
@@ -93,7 +94,7 @@ class App extends React.Component {
         </header>
 
         <section>
-          {(this.state.template === 'To Do') ? (
+          {(this.state.template[0] === 'To Do') ? (
             <div>
               <ListTypeForm
                 updateTemplate={(template) => this.updateTemplate(template)}

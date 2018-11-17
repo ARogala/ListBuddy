@@ -9,24 +9,21 @@ class TemplateList extends React.Component {
 		const listItems = this.props.templateListItems;
 
 		let templateListItems = groupBy(listItems, 'template');
-		console.log(templateListItems);
 		let groupedListItems;
 		for(let i in templateListItems) {
 			if(i === template) {
-				console.log(templateListItems[i]);
 				groupedListItems = groupBy(templateListItems[i], 'category');
 			}
-
 		}
-		console.log(groupedListItems);
+		//console.log(groupedListItems);
 		const allCategories = Object.keys(groupedListItems);
-		console.log(allCategories);
+		//console.log(allCategories);
+
 		/*
 			for each category if the number of items is greater than 1
 			build the DOM
 		*/
 		const multItemsInCat = [];
-
 		for(let i = 0; i < allCategories.length; i++) {
 			if(groupedListItems[allCategories[i]].length > 1) {
 				console.log(groupedListItems[allCategories[i]]);
@@ -44,6 +41,7 @@ class TemplateList extends React.Component {
 				);
 			}
 		}
+
 		//build the DOM for the categories with one item
 		const singleItemInCat = [];
 		for(let i = 0; i < allCategories.length; i++) {
@@ -74,5 +72,6 @@ export default TemplateList;
 
 TemplateList.propTypes = {
   templateListItems: PropTypes.array.isRequired,
+  template: PropTypes.string.isRequired
 
 }

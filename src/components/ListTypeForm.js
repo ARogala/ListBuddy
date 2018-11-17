@@ -5,7 +5,7 @@ class ListTypeForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
-			template: 'To Do'
+			template: 'Choose a Template'
 		};
 	}
 
@@ -21,7 +21,7 @@ class ListTypeForm extends React.Component {
 
 	resetForm() {
 		this.setState({
-			template: 'To Do'
+			template: 'Choose a Template'
 		});
 	}
 
@@ -34,6 +34,7 @@ class ListTypeForm extends React.Component {
 					<div>
 						<label htmlFor="template">List Templates:</label>
 						<select className="listTypeForm__select" id="template" value={this.state.template} onChange={(e)=> this.handleTemplateChange(e)}>
+							<option value="Choose a Template">Choose a Template</option>
 							<option value="To Do">To Do</option>
 							<option value="Grocery">Grocery</option>
 							<option value="Travel">Travel</option>

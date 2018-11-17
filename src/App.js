@@ -7,6 +7,7 @@ import List from './components/List';
 
 import ListTypeForm from './components/ListTypeForm';
 import ListItemForm from './components/ListItemForm';
+import TemplateList from './components/TemplateList';
 
 import list from './list.svg';
 import GitHub from './img/github.svg';
@@ -117,7 +118,10 @@ class App extends React.Component {
                 saveTemplateListItem={(item, category)=> this.saveTemplateListItem(item,category)}
                 template={this.state.template}
               />
-
+              <TemplateList
+                templateListItems={this.state.templateListItems}
+                template={this.state.template}
+              />
             </div>
           )}
 

@@ -7,8 +7,18 @@ class TemplateList extends React.Component {
 	render() {
 		const template = this.props.template;
 		const listItems = this.props.templateListItems;
-		if(listItems.length !== 0) {
-			let templateListItems = groupBy(listItems, 'template');
+		let templateListItems = groupBy(listItems, 'template');
+		//console.log(Object.keys(templateListItems));
+		let renderLogic;
+		for(let i = 0; i < Object.keys(templateListItems).length; i++) {
+			if(Object.keys(templateListItems)[i] === template) {
+				renderLogic = true;
+			}
+			else {
+				renderLogic = false;
+			}
+		}
+		if(renderLogic) {
 			let groupedListItems;
 			for(let i in templateListItems) {
 				if(i === template) {

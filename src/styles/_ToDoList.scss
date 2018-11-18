@@ -1,10 +1,11 @@
 @charset "UTF-8";
 
-.list {
+.toDoList {
 
 	&__item {
 
 	}
+
 	&__item input:checked ~ label {
 		text-decoration: line-through;
 		font-weight: normal;

@@ -37,12 +37,16 @@ class App extends React.Component {
   saveToDoListItem() {
     const toDoListItems = this.state.toDoListItems;
     const toDoItem = this.state.toDoItem.trim();
-    if(toDoItem.length !== 0) {
-      toDoListItems.push(toDoItem);
-      localStorage.setItem('toDoListItems', JSON.stringify(toDoListItems));
-      this.setState({toDoListItems: toDoListItems})
-      this.setState({toDoItem: ''});
-    }
+
+    //push empty object onto toDoListItems array
+    toDoListItems.push({});
+    const newIndex = toDoListItems.length - 1;
+    toDoListItems[newIndex].toDoItem = toDoItem;
+    toDoListItems[newIndex].checked = false;
+
+    localStorage.setItem('toDoListItems', JSON.stringify(toDoListItems));
+    this.setState({toDoListItems: toDoListItems})
+    this.setState({toDoItem: ''});
   }
 
   deleteToDoList() {

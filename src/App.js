@@ -45,7 +45,7 @@ class App extends React.Component {
     toDoListItems[newIndex].checked = false;
 
     localStorage.setItem('toDoListItems', JSON.stringify(toDoListItems));
-    this.setState({toDoListItems: toDoListItems})
+    this.setState({toDoListItems: toDoListItems});
     this.setState({toDoItem: ''});
   }
 
@@ -55,6 +55,15 @@ class App extends React.Component {
       this.setState({toDoListItems: []});
       localStorage.removeItem('toDoListItems');
     }
+  }
+
+  saveToDoListProgress(toDoListRef) {
+    const toDoListItems = this.state.toDoListItems;
+    for(let i = 0; i < toDoListRef.length; i++) {
+      toDoListItems[i].checked = toDoListRef[i].childNodes[0].checked;
+    }
+    localStorage.setItem('toDoListItems', JSON.stringify(toDoListItems));
+    this.setState({toDoListItems: toDoListItems});
   }
 
   //template lists here
@@ -111,8 +120,9 @@ class App extends React.Component {
               />
               <ToDoList
                 toDoListItems={this.state.toDoListItems}
+                saveToDoListProgress={(toDoListRef) => this.saveToDoListProgress(toDoListRef)}
+                deleteToDoList={() => this.deleteToDoList()}
               />
-              <button onClick={() => this.deleteToDoList()}>Trash List</button>
             </div>
           ):(
             <div>

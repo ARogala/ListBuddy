@@ -41,9 +41,12 @@ class CategorizedList extends React.Component {
 						<li key={i}>
 							<span>{allCategories[i]}</span>
 							<ul>
-								{groupedListItems[allCategories[i]].map((item)=>{
+								{groupedListItems[allCategories[i]].map((item, index)=>{
 									return(
-										<li key={item.id}>{item.item}</li>
+										<li key={item.id}>
+											<input type="checkbox" defaultChecked={item.checked} id={`${item.item.trim().replace(/\s/g, '')}${index}`}/>
+											<label htmlFor={`${item.item.trim().replace(/\s/g, '')}${index}`}>{item.item}</label>
+										</li>
 									);
 								})}
 							</ul>
@@ -60,7 +63,18 @@ class CategorizedList extends React.Component {
 						<li key={i}>
 							<span>{allCategories[i]}</span>
 							<ul>
-								<li key={groupedListItems[allCategories[i]][0].id}>{groupedListItems[allCategories[i]][0].item}</li>
+								<li key={groupedListItems[allCategories[i]][0].id}>
+									<input
+										type="checkbox"
+										defaultChecked={groupedListItems[allCategories[i]][0].checked}
+										id={`${groupedListItems[allCategories[i]][0].item.trim().replace(/\s/g, '')}${i}`}
+									/>
+									<label
+										htmlFor={`${groupedListItems[allCategories[i]][0].item.trim().replace(/\s/g, '')}${i}`}
+									>
+										{groupedListItems[allCategories[i]][0].item}
+									</label>
+								</li>
 							</ul>
 						</li>
 					);

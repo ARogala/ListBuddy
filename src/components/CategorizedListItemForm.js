@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class ListItemForm extends React.Component {
+class CategorizedListItemForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state={
@@ -20,7 +20,7 @@ class ListItemForm extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		this.props.saveTemplateListItem(this.state.item, this.state.itemCategory);
+		this.props.saveCategorizedListItem(this.state.item, this.state.itemCategory);
 		this.resetForm();
 	}
 
@@ -39,7 +39,7 @@ class ListItemForm extends React.Component {
 			select = (
 				<div>
 					<label htmlFor="category">Item Category:</label>
-					<select className="listForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)}>
+					<select className="categoriezedListForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)}>
 						<option value="--Please Select an Item Category--">--Please Select an Item Category--</option>
 						<option value="Produce">Produce</option>
 						<option value="Meat">Meat</option>
@@ -55,7 +55,7 @@ class ListItemForm extends React.Component {
 			select = (
 				<div>
 					<label htmlFor="category">Item Category:</label>
-					<select className="listForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)}>
+					<select className="categoriezedListForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)}>
 						<option value="--Please Select an Item Category--">--Please Select an Item Category--</option>
 						<option value="Clothes">Clothes</option>
 						<option value="Medicine/First Aid">Medicine/First Aid</option>
@@ -70,35 +70,35 @@ class ListItemForm extends React.Component {
 		}
 
 		return (
-			<form className="listForm" onSubmit={(e) => this.handleSubmit(e)}>
+			<form className="categorizedListForm" onSubmit={(e) => this.handleSubmit(e)}>
 				<fieldset>
 					<legend>Enter Item and Item Category</legend>
 					<div>
-						<label htmlFor="item">List Item:</label>
+						<label htmlFor="categorizedItem">List Item:</label>
 						<input
 							type="text"
-							id="item"
-							name="list_item"
+							id="categorizedItem"
+							name="categorizedList_item"
 							required
-							className="listForm__input"
+							className="categorizedListForm__input"
 							value={this.state.item}
 							onChange={(e) => this.handleItemChange(e)}
 						/>
 					</div>
 
 					{select}
-					<div className="listForm__btnContainer">
+					<div className="categorizedListForm__btnContainer">
 						<button
 							type="submit"
 							value="Submit"
-							className="listForm__btn"
+							className="categorizedListForm__btn"
 						>
 							Add Item
 						</button>
 						<button
 							type="button"
 							value="Reset"
-							className="listForm__btn"
+							className="categorizedListForm__btn"
 							onClick={() => this.resetForm()}
 						>
 							Cancel
@@ -110,10 +110,9 @@ class ListItemForm extends React.Component {
 	}
 }
 
-export default ListItemForm;
+export default CategorizedListItemForm;
 
-ListItemForm.propTypes = {
-  saveTemplateListItem: PropTypes.func.isRequired,
+CategorizedListItemForm.propTypes = {
+  saveCategorizedListItem: PropTypes.func.isRequired,
   template: PropTypes.string.isRequired
-
 }

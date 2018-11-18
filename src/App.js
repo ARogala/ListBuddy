@@ -6,8 +6,8 @@ import ToDoListInput from './components/ToDoListInput';
 import ToDoList from './components/ToDoList';
 
 import ListTypeForm from './components/ListTypeForm';
-import ListItemForm from './components/ListItemForm';
-import TemplateList from './components/TemplateList';
+import CategorizedListItemForm from './components/CategorizedListItemForm';
+import CategorizedList from './components/CategorizedList';
 
 import list from './list.svg';
 import GitHub from './img/github.svg';
@@ -22,7 +22,7 @@ class App extends React.Component {
       toDoListItems: JSON.parse(localStorage.getItem('toDoListItems') || '[]'),
       toDoItem: '',
       template: 'To Do',
-      templateListItems: JSON.parse(localStorage.getItem('templateListItems') || '[]')
+      categorizedListItems: JSON.parse(localStorage.getItem('categorizedListItems') || '[]')
     };
   }
 
@@ -46,7 +46,7 @@ class App extends React.Component {
 
     localStorage.setItem('toDoListItems', JSON.stringify(toDoListItems));
     this.setState({toDoListItems: toDoListItems});
-    this.setState({toDoItem: ''});
+    this.clearToDoInputText();
   }
 
   deleteToDoList() {
@@ -66,30 +66,30 @@ class App extends React.Component {
     this.setState({toDoListItems: toDoListItems});
   }
 
-  //template lists here
+  //categorized list methods
   updateTemplate(template) {
     //console.log(template);
     //localStorage.setItem('template', JSON.stringify(template));
     this.setState({template: template});
   }
 
-  saveTemplateListItem(item, category) {
+  saveCategorizedListItem(item, category) {
     console.log(item);
     console.log(category);
     console.log(this.state.template);
-    const templateListItems = this.state.templateListItems;
-    //push a new empty object on the templateListItems array
-    templateListItems.push({});
+    const categorizedListItems = this.state.categorizedListItems;
+    //push a new empty object on the categorizedListItems array
+    categorizedListItems.push({});
 
-    const newIndex = templateListItems.length - 1;
-    templateListItems[newIndex].item = item;
-    templateListItems[newIndex].category = category;
-    templateListItems[newIndex].checked = false;
-    templateListItems[newIndex].id = newIndex;
-    templateListItems[newIndex].template = this.state.template;
+    const newIndex = categorizedListItems.length - 1;
+    categorizedListItems[newIndex].item = item;
+    categorizedListItems[newIndex].category = category;
+    categorizedListItems[newIndex].checked = false;
+    categorizedListItems[newIndex].id = newIndex;
+    categorizedListItems[newIndex].template = this.state.template;
 
-    localStorage.setItem('templateListItems', JSON.stringify(templateListItems));
-    this.setState({templateListItems: templateListItems});
+    localStorage.setItem('categorizedListItems', JSON.stringify(categorizedListItems));
+    this.setState({categorizedListItems: categorizedListItems});
   }
 
 
@@ -129,12 +129,12 @@ class App extends React.Component {
               <ListTypeForm
                 updateTemplate={(template) => this.updateTemplate(template)}
               />
-              <ListItemForm
-                saveTemplateListItem={(item, category)=> this.saveTemplateListItem(item,category)}
+              <CategorizedListItemForm
+                saveCategorizedListItem={(item, category)=> this.saveCategorizedListItem(item,category)}
                 template={this.state.template}
               />
-              <TemplateList
-                templateListItems={this.state.templateListItems}
+              <CategorizedList
+                categorizedListItems={this.state.categorizedListItems}
                 template={this.state.template}
               />
             </div>

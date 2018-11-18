@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 import groupBy from './groupBy.js';
 
-class TemplateList extends React.Component {
+class CategorizedList extends React.Component {
 	render() {
 		const template = this.props.template;
-		const listItems = this.props.templateListItems;
-		let templateListItems = groupBy(listItems, 'template');
-		//console.log(Object.keys(templateListItems));
+		const listItems = this.props.categorizedListItems;
+		let categorizedListItems = groupBy(listItems, 'template');
+		//console.log(Object.keys(categorizedListItems));
 		let renderLogic;
-		for(let i = 0; i < Object.keys(templateListItems).length; i++) {
-			if(Object.keys(templateListItems)[i] === template) {
+		for(let i = 0; i < Object.keys(categorizedListItems).length; i++) {
+			if(Object.keys(categorizedListItems)[i] === template) {
 				renderLogic = true;
 			}
 			else {
@@ -20,9 +20,9 @@ class TemplateList extends React.Component {
 		}
 		if(renderLogic) {
 			let groupedListItems;
-			for(let i in templateListItems) {
+			for(let i in categorizedListItems) {
 				if(i === template) {
-					groupedListItems = groupBy(templateListItems[i], 'category');
+					groupedListItems = groupBy(categorizedListItems[i], 'category');
 				}
 			}
 			//console.log(groupedListItems);
@@ -77,16 +77,15 @@ class TemplateList extends React.Component {
 		}
 		else {
 			return (
-				<div>Your {template} list is empty</div>
+				<div>Add some items to your {template} list</div>
 			);
 		}
 	}
 }
 
-export default TemplateList;
+export default CategorizedList;
 
-TemplateList.propTypes = {
-  templateListItems: PropTypes.array.isRequired,
+CategorizedList.propTypes = {
+  categorizedListItems: PropTypes.array.isRequired,
   template: PropTypes.string.isRequired
-
 }

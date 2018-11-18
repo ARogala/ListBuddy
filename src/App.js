@@ -74,9 +74,9 @@ class App extends React.Component {
   }
 
   saveCategorizedListItem(item, category) {
-    console.log(item);
-    console.log(category);
-    console.log(this.state.template);
+    // console.log(item);
+    // console.log(category);
+    // console.log(this.state.template);
     const categorizedListItems = this.state.categorizedListItems;
     //push a new empty object on the categorizedListItems array
     categorizedListItems.push({});

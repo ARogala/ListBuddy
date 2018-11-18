@@ -20,8 +20,13 @@ class CategorizedListItemForm extends React.Component {
 
 	handleSubmit(e) {
 		e.preventDefault();
-		this.props.saveCategorizedListItem(this.state.item, this.state.itemCategory);
-		this.resetForm();
+		if(this.state.itemCategory === '--Please Select an Item Category--') {
+			alert('Pleae Select and Item Category');
+		}
+		else {
+			this.props.saveCategorizedListItem(this.state.item, this.state.itemCategory);
+			this.resetForm();
+		}
 	}
 
 	resetForm() {
@@ -39,8 +44,8 @@ class CategorizedListItemForm extends React.Component {
 			select = (
 				<div>
 					<label htmlFor="category">Item Category:</label>
-					<select className="categoriezedListForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)}>
-						<option value="--Please Select an Item Category--">--Please Select an Item Category--</option>
+					<select className="categoriezedListForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)} required>
+						<option value="--Please Select an Item Category--" disabled>--Please Select an Item Category--</option>
 						<option value="Produce">Produce</option>
 						<option value="Meat">Meat</option>
 						<option value="Dairy">Dairy</option>
@@ -55,8 +60,8 @@ class CategorizedListItemForm extends React.Component {
 			select = (
 				<div>
 					<label htmlFor="category">Item Category:</label>
-					<select className="categoriezedListForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)}>
-						<option value="--Please Select an Item Category--">--Please Select an Item Category--</option>
+					<select className="categoriezedListForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)} required>
+						<option value="--Please Select an Item Category--" disabled>--Please Select an Item Category--</option>
 						<option value="Clothes">Clothes</option>
 						<option value="Medicine/First Aid">Medicine/First Aid</option>
 						<option value="Technology">Technology</option>

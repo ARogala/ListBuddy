@@ -36,7 +36,7 @@ class CategorizedList extends React.Component {
 			const multItemsInCat = [];
 			for(let i = 0; i < allCategories.length; i++) {
 				if(groupedListItems[allCategories[i]].length > 1) {
-					console.log(groupedListItems[allCategories[i]]);
+					//console.log(groupedListItems[allCategories[i]]);
 					multItemsInCat.push(
 						<li key={i}>
 							<span>{allCategories[i]}</span>

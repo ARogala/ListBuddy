@@ -6,7 +6,7 @@ class ToDoList extends React.Component {
 		const toDoListItems = this.props.toDoListItems;
 		const items = toDoListItems.map((item,index) => {
 			return(
-				<li key={index} className="list__item">
+				<li key={index} className="toDoList__item">
 					<input type="checkbox" id={`${item}${index}`}/>
 					<label htmlFor={`${item}${index}`}>{item}</label>
 				</li>
@@ -16,7 +16,7 @@ class ToDoList extends React.Component {
 		return (
 			<div>
 				<h3>To Do List</h3>
-				<ul className="list">
+				<ul className="toDoList">
 					{items}
 				</ul>
 			</div>

@@ -8,12 +8,12 @@ class ToDoListInput extends React.Component {
 		const clearToDoInputText        = this.props.clearToDoInputText;
 		const saveToDoListItem          = this.props.saveToDoListItem;
 		return (
-			<div className="input">
-				<label htmlFor="item">Input a list item</label>
+			<div className="toDoInput">
+				<label htmlFor="toDoItem">Input a list item</label>
 				<input
 					type="text"
-					className="input__item"
-					id="item"
+					className="toDoInput__item"
+					id="toDoItem"
 					placeholder="Enter a list item..."
 					value={toDoItem}
 					onChange={(e) => handleToDoItemTextChange(e.target.value)}
@@ -23,7 +23,7 @@ class ToDoListInput extends React.Component {
 						}
 					}}
 				/>
-				<div className="input__btnbox">
+				<div className="toDoInput__btnbox">
 					<button
 						onClick={() => saveToDoListItem()}
 					>

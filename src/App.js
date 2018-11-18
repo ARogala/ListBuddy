@@ -2,8 +2,8 @@ import React from 'react';
 
 
 import Navigation from './components/Navigation';
-import InputListItem from './components/InputListItem';
-import List from './components/List';
+import ToDoListInput from './components/ToDoListInput';
+import ToDoList from './components/ToDoList';
 
 import ListTypeForm from './components/ListTypeForm';
 import ListItemForm from './components/ListItemForm';
@@ -19,37 +19,37 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listItems: JSON.parse(localStorage.getItem('listItems') || '[]'),
-      inputItemText: '',
+      toDoListItems: JSON.parse(localStorage.getItem('toDoListItems') || '[]'),
+      toDoItem: '',
       template: 'To Do',
       templateListItems: JSON.parse(localStorage.getItem('templateListItems') || '[]')
     };
   }
 
-  handleInputItemTextChange(inputItemText) {
-    this.setState({inputItemText: inputItemText});
+  handleToDoItemTextChange(toDoItem) {
+    this.setState({toDoItem: toDoItem});
   }
 
-  clearInputText() {
-    this.setState({inputItemText: ''});
+  clearToDoInputText() {
+    this.setState({toDoItem: ''});
   }
 
-  saveListItem() {
-    const listItems = this.state.listItems;
-    const item = this.state.inputItemText.trim();
-    if(item.length !== 0) {
-      listItems.push(item);
-      localStorage.setItem('listItems', JSON.stringify(listItems));
-      this.setState({listItems: listItems})
-      this.setState({inputItemText: ''});
+  saveToDoListItem() {
+    const toDoListItems = this.state.toDoListItems;
+    const toDoItem = this.state.toDoItem.trim();
+    if(toDoItem.length !== 0) {
+      toDoListItems.push(toDoItem);
+      localStorage.setItem('toDoListItems', JSON.stringify(toDoListItems));
+      this.setState({toDoListItems: toDoListItems})
+      this.setState({toDoItem: ''});
     }
   }
 
-  deleteList() {
+  deleteToDoList() {
     const result = window.confirm("Do you really want to delete your list?");
     if(result === true) {
-      this.setState({listItems: []});
-      localStorage.removeItem('listItems');
+      this.setState({toDoListItems: []});
+      localStorage.removeItem('toDoListItems');
     }
   }
 
@@ -99,16 +99,16 @@ class App extends React.Component {
               <ListTypeForm
                 updateTemplate={(template) => this.updateTemplate(template)}
               />
-              <InputListItem
-                inputItemText={this.state.inputItemText}
-                handleInputItemTextChange={(inputItemText)=>this.handleInputItemTextChange(inputItemText)}
-                clearInputText={()=>this.clearInputText()}
-                saveListItem={()=>this.saveListItem()}
+              <ToDoListInput
+                toDoItem={this.state.toDoItem}
+                handleToDoItemTextChange={(toDoItem)=>this.handleToDoItemTextChange(toDoItem)}
+                clearToDoInputText={()=>this.clearToDoInputText()}
+                saveToDoListItem={()=>this.saveToDoListItem()}
               />
-              <List
-                listItems={this.state.listItems}
+              <ToDoList
+                toDoListItems={this.state.toDoListItems}
               />
-              <button onClick={() => this.deleteList()}>Trash List</button>
+              <button onClick={() => this.deleteToDoList()}>Trash List</button>
             </div>
           ):(
             <div>

@@ -38,12 +38,12 @@ class CategorizedList extends React.Component {
 				if(groupedListItems[allCategories[i]].length > 1) {
 					//console.log(groupedListItems[allCategories[i]]);
 					multItemsInCat.push(
-						<li key={i}>
+						<li key={i} className="categorizedList__category">
 							<span>{allCategories[i]}</span>
-							<ul>
+							<ul className="categorizedList__categoryUL">
 								{groupedListItems[allCategories[i]].map((item, index)=>{
 									return(
-										<li key={item.id}>
+										<li key={item.id} className="categorizedList__item">
 											<input type="checkbox" defaultChecked={item.checked} id={`${item.item.trim().replace(/\s/g, '')}${index}`}/>
 											<label htmlFor={`${item.item.trim().replace(/\s/g, '')}${index}`}>{item.item}</label>
 										</li>
@@ -60,10 +60,10 @@ class CategorizedList extends React.Component {
 			for(let i = 0; i < allCategories.length; i++) {
 				if(groupedListItems[allCategories[i]].length === 1) {
 					singleItemInCat.push(
-						<li key={i}>
+						<li key={i} className="categorizedList__category">
 							<span>{allCategories[i]}</span>
-							<ul>
-								<li key={groupedListItems[allCategories[i]][0].id}>
+							<ul className="categorizedList__categoryUL">
+								<li key={groupedListItems[allCategories[i]][0].id} className="categorizedList__item">
 									<input
 										type="checkbox"
 										defaultChecked={groupedListItems[allCategories[i]][0].checked}
@@ -81,8 +81,9 @@ class CategorizedList extends React.Component {
 				}
 			}
 			return (
-				<div>{template}
-					<ul>
+				<div>
+					<h3>{template} List</h3>
+					<ul className="categorizedList">
 						{multItemsInCat}
 						{singleItemInCat}
 					</ul>

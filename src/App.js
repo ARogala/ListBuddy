@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 
 import Navigation from './components/Navigation';
 import ToDoListInput from './components/ToDoListInput';
@@ -13,7 +13,27 @@ import list from './list.svg';
 import GitHub from './img/github.svg';
 import LinkedIn from './img/linkedin.svg';
 
+//materialUI
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    maxWidth: 600,
+    margin: 'auto'
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    color: theme.palette.text.secondary,
+  },
+  footer: {
+    textAlign: 'center',
+    margin: '10px'
+  }
+});
 
 class App extends React.Component {
   constructor(props) {
@@ -95,63 +115,69 @@ class App extends React.Component {
 
 
   render() {
+    const { classes } = this.props;
     return (
-      <div className="App">
-        <Navigation />
-
-        <header className="header">
-          <div className="header__container">
-            <img src={list} className="header__logo" alt="logo" />
-            <h1 className="header__title">List Buddy</h1>
-          </div>
-        </header>
-
-        <section>
-          {(this.state.template === 'To Do') ? (
-            <div>
-              <ListTypeForm
-                updateTemplate={(template) => this.updateTemplate(template)}
-              />
-              <ToDoListInput
-                toDoItem={this.state.toDoItem}
-                handleToDoItemTextChange={(toDoItem)=>this.handleToDoItemTextChange(toDoItem)}
-                clearToDoInputText={()=>this.clearToDoInputText()}
-                saveToDoListItem={()=>this.saveToDoListItem()}
-              />
-              <ToDoList
-                toDoListItems={this.state.toDoListItems}
-                saveToDoListProgress={(toDoListRef) => this.saveToDoListProgress(toDoListRef)}
-                deleteToDoList={() => this.deleteToDoList()}
-              />
-            </div>
-          ):(
-            <div>
-              <ListTypeForm
-                updateTemplate={(template) => this.updateTemplate(template)}
-              />
-              <CategorizedListItemForm
-                saveCategorizedListItem={(item, category)=> this.saveCategorizedListItem(item,category)}
-                template={this.state.template}
-              />
-              <CategorizedList
-                categorizedListItems={this.state.categorizedListItems}
-                template={this.state.template}
-              />
-            </div>
-          )}
-
-        </section>
-
-        <footer className="footer">
-          <div className="footer__container">
-            <img src={GitHub} alt="github"/>
-            <img src={LinkedIn} alt="linkedIn"/>
-          </div>
-        </footer>
-
-      </div>
+      <Grid container className={classes.root}>
+        <Grid item xs={12}>
+          <Paper className={classes.paper}>
+            <CssBaseline />
+            <Navigation />
+            <header className="header">
+              <div className="header__container">
+                <img src={list} className="header__logo" alt="logo" />
+                <h1 className="header__title">List Buddy</h1>
+              </div>
+            </header>
+            <section>
+              {(this.state.template === 'To Do') ? (
+                <div>
+                  <ListTypeForm
+                    updateTemplate={(template) => this.updateTemplate(template)}
+                  />
+                  <ToDoListInput
+                    toDoItem={this.state.toDoItem}
+                    handleToDoItemTextChange={(toDoItem)=>this.handleToDoItemTextChange(toDoItem)}
+                    clearToDoInputText={()=>this.clearToDoInputText()}
+                    saveToDoListItem={()=>this.saveToDoListItem()}
+                  />
+                  <ToDoList
+                    toDoListItems={this.state.toDoListItems}
+                    saveToDoListProgress={(toDoListRef) => this.saveToDoListProgress(toDoListRef)}
+                    deleteToDoList={() => this.deleteToDoList()}
+                  />
+                </div>
+              ):(
+                <div>
+                  <ListTypeForm
+                    updateTemplate={(template) => this.updateTemplate(template)}
+                  />
+                  <CategorizedListItemForm
+                    saveCategorizedListItem={(item, category)=> this.saveCategorizedListItem(item,category)}
+                    template={this.state.template}
+                  />
+                  <CategorizedList
+                    categorizedListItems={this.state.categorizedListItems}
+                    template={this.state.template}
+                  />
+                </div>
+              )}
+            </section>
+            <footer className={classes.footer}>
+              <div>
+                <a href="https://github.com/ARogala"><img src={GitHub} alt="github"/></a>
+                <a href="https://www.linkedin.com/in/andrew-rogala"><img src={LinkedIn} alt="linkedIn"/></a>
+              </div>
+            </footer>
+          </Paper>
+        </Grid>
+      </Grid>
     );
   }
 }
 
-export default App;
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+//export default App;
+export default withStyles(styles)(App);

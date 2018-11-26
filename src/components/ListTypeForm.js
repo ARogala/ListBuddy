@@ -50,7 +50,7 @@ class ListTypeForm extends React.Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<form className="listTypeForm" onSubmit={(e) => this.handleSubmit(e)}>
+			<form onSubmit={(e) => this.handleSubmit(e)}>
 				<fieldset>
 					<legend>Select A List Template</legend>
 					<FormControl className={classes.formControl}>

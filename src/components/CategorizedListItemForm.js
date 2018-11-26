@@ -1,6 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { withStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+	formControl: {
+		margin: theme.spacing.unit,
+		paddingRight: '20px',
+		width: '100%'
+	},
+	button: {
+		margin: theme.spacing.unit,
+	},
+	container: {
+		textAlign: 'center'
+	}
+});
+
 class CategorizedListItemForm extends React.Component {
 	constructor(props) {
 		super(props);
@@ -37,14 +58,19 @@ class CategorizedListItemForm extends React.Component {
 	}
 
 	render() {
+		const { classes } = this.props;
 		const template = this.props.template;
 		let select;
 		//console.log(template);
 		if(template === 'Grocery') {
 			select = (
-				<div>
-					<label htmlFor="category">Item Category:</label>
-					<select className="categoriezedListForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)} required>
+				<FormControl className={classes.formControl}>
+					<InputLabel htmlFor="category">Item Category</InputLabel>
+					<NativeSelect
+						value={this.state.itemCategory}
+						onChange={(e) => this.handleCategoryChange(e)}
+						input={<Input name="category" id="category"/>}
+					>
 						<option value="--Please Select an Item Category--" disabled>--Please Select an Item Category--</option>
 						<option value="Produce">Produce</option>
 						<option value="Meat">Meat</option>
@@ -52,15 +78,19 @@ class CategorizedListItemForm extends React.Component {
 						<option value="Canned">Canned</option>
 						<option value="Frozen">Frozen</option>
 						<option value="Dry/Baking">Dry/Baking</option>
-					</select>
-				</div>
+					</NativeSelect>
+				</FormControl>
  			);
 		}
 		else if(template === 'Travel') {
 			select = (
-				<div>
-					<label htmlFor="category">Item Category:</label>
-					<select className="categoriezedListForm__select" id="category" value={this.state.itemCategory} onChange={(e) => this.handleCategoryChange(e)} required>
+				<FormControl className={classes.formControl}>
+					<InputLabel htmlFor="category">Item Category</InputLabel>
+					<NativeSelect
+						value={this.state.itemCategory}
+						onChange={(e) => this.handleCategoryChange(e)}
+						input={<Input name="category" id="category"/>}
+					>
 						<option value="--Please Select an Item Category--" disabled>--Please Select an Item Category--</option>
 						<option value="Clothes">Clothes</option>
 						<option value="Medicine/First Aid">Medicine/First Aid</option>
@@ -69,45 +99,47 @@ class CategorizedListItemForm extends React.Component {
 						<option value="Camping/Hiking">Camping/Hiking</option>
 						<option value="Toiletry">Toiletry</option>
 						<option value="Food">Food</option>
-					</select>
-				</div>
+					</NativeSelect>
+				</FormControl>
 			);
 		}
 
 		return (
-			<form className="categorizedListForm" onSubmit={(e) => this.handleSubmit(e)}>
+			<form onSubmit={(e) => this.handleSubmit(e)}>
 				<fieldset>
 					<legend>Enter Item and Item Category</legend>
-					<div>
-						<label htmlFor="categorizedItem">List Item:</label>
-						<input
+					<FormControl className={classes.formControl}>
+						<InputLabel htmlFor="categorizedItem">List Item</InputLabel>
+						<Input
 							type="text"
 							id="categorizedItem"
-							name="categorizedList_item"
+							name="categorizedItem"
 							required
-							className="categorizedListForm__input"
 							value={this.state.item}
 							onChange={(e) => this.handleItemChange(e)}
 						/>
-					</div>
-
+					</FormControl>
 					{select}
-					<div className="categorizedListForm__btnContainer">
-						<button
+					<div className={classes.container}>
+						<Button
 							type="submit"
 							value="Submit"
-							className="categorizedListForm__btn"
+							className={classes.button}
+							variant="contained"
+							color="primary"
 						>
 							Add Item
-						</button>
-						<button
+						</Button>
+						<Button
 							type="button"
 							value="Reset"
-							className="categorizedListForm__btn"
+							className={classes.button}
+							variant="contained"
+							color="default"
 							onClick={() => this.resetForm()}
 						>
 							Cancel
-						</button>
+						</Button>
 					</div>
 				</fieldset>
 			</form>
@@ -115,9 +147,10 @@ class CategorizedListItemForm extends React.Component {
 	}
 }
 
-export default CategorizedListItemForm;
+export default withStyles(styles)(CategorizedListItemForm);
 
 CategorizedListItemForm.propTypes = {
   saveCategorizedListItem: PropTypes.func.isRequired,
-  template: PropTypes.string.isRequired
+  template: PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired
 }

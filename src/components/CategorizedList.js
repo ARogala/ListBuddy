@@ -8,16 +8,16 @@ class CategorizedList extends React.Component {
 		const template = this.props.template;
 		const listItems = this.props.categorizedListItems;
 		let categorizedListItems = groupBy(listItems, 'template');
-		//console.log(Object.keys(categorizedListItems));
-		let renderLogic;
+
+		let renderLogic = false;
 		for(let i = 0; i < Object.keys(categorizedListItems).length; i++) {
+			// console.log(Object.keys(categorizedListItems)[i]);
+			// console.log(template);
 			if(Object.keys(categorizedListItems)[i] === template) {
 				renderLogic = true;
 			}
-			else {
-				renderLogic = false;
-			}
 		}
+		// console.log(renderLogic);
 		if(renderLogic) {
 			let groupedListItems;
 			for(let i in categorizedListItems) {

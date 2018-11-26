@@ -1,6 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { withStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+	formControl: {
+		margin: theme.spacing.unit,
+		paddingRight: '20px',
+		width: '100%'
+	},
+	button: {
+		margin: theme.spacing.unit,
+	},
+	container: {
+		textAlign: 'center'
+	}
+});
+
+
 class ListTypeForm extends React.Component {
 	constructor(props) {
 		super(props);
@@ -26,36 +48,44 @@ class ListTypeForm extends React.Component {
 	}
 
 	render() {
-
+		const { classes } = this.props;
 		return (
 			<form className="listTypeForm" onSubmit={(e) => this.handleSubmit(e)}>
 				<fieldset>
 					<legend>Select A List Template</legend>
-					<div>
-						<label htmlFor="template">List Templates:</label>
-						<select className="listTypeForm__select" id="template" value={this.state.template} onChange={(e)=> this.handleTemplateChange(e)}>
-							<option value="Choose a Template">Choose a Template</option>
+					<FormControl className={classes.formControl}>
+						<InputLabel htmlFor="template">List Templates</InputLabel>
+						<NativeSelect
+							value={this.state.template}
+							onChange={(e) => this.handleTemplateChange(e)}
+							input={<Input name="template" id="template"/>}
+						>
+							<option value="Choose a Template" disabled>Choose a Template</option>
 							<option value="To Do">To Do</option>
 							<option value="Grocery">Grocery</option>
 							<option value="Travel">Travel</option>
-						</select>
-					</div>
-					<div className="listTypeForm__btnContainer">
-						<button
+						</NativeSelect>
+					</FormControl>
+					<div className={classes.container}>
+						<Button
 							type="submit"
 							value="Submit"
-							className="listTypeForm__btn"
+							className={classes.button}
+							variant="contained"
+							color="primary"
 						>
 							Use Template
-						</button>
-						<button
+						</Button>
+						<Button
 							type="button"
 							value="Reset"
-							className="listTypeForm__btn"
+							className={classes.button}
+							variant="contained"
+							color="default"
 							onClick={() => this.resetForm()}
 						>
 							Cancel
-						</button>
+						</Button>
 					</div>
 				</fieldset>
 			</form>
@@ -63,9 +93,10 @@ class ListTypeForm extends React.Component {
 	}
 }
 
-export default ListTypeForm;
+export default withStyles(styles)(ListTypeForm);
 
 ListTypeForm.propTypes = {
   updateTemplate: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired
 
 }

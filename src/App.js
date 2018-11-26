@@ -114,6 +114,14 @@ class App extends React.Component {
     this.setState({categorizedListItems: categorizedListItems});
   }
 
+  deleteCategorizedList() {
+    const result = window.confirm("Do you really want to delete your list?");
+    if(result === true) {
+      this.setState({categorizedListItems: []});
+      localStorage.removeItem('categorizedListItems');
+    }
+  }
+
 
 
   render() {
@@ -160,6 +168,7 @@ class App extends React.Component {
                   <CategorizedList
                     categorizedListItems={this.state.categorizedListItems}
                     template={this.state.template}
+                    deleteCategorizedList={() => this.deleteCategorizedList()}
                   />
                 </div>
               )}

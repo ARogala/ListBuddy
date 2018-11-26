@@ -4,7 +4,16 @@ import PropTypes from 'prop-types';
 import groupBy from './groupBy.js';
 
 import { withStyles } from '@material-ui/core/styles';
+import RootRef from '@material-ui/core/RootRef';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
 import Button from '@material-ui/core/Button';
+
 
 const styles = theme => ({
   button: {
@@ -21,14 +30,26 @@ const styles = theme => ({
   },
   label : {
   	fontWeight: 'bold'
+  },
+  listItem: {
+  	flexWrap: 'wrap'
+  },
+  subList: {
+  	width: '100%'
+  },
+  listText: {
+  	textAlign: 'center',
+  	padding: '0'
   }
 });
 
 class CategorizedList extends React.Component {
 	render() {
-		const { classes } = this.props;
-		const template    = this.props.template;
-		const listItems   = this.props.categorizedListItems;
+		const { classes }           = this.props;
+		const template              = this.props.template;
+		const listItems             = this.props.categorizedListItems;
+		const deleteCategorizedList = this.props.deleteCategorizedList;
+
 		let categorizedListItems = groupBy(listItems, 'template');
 
 		let renderLogic = false;
@@ -60,19 +81,28 @@ class CategorizedList extends React.Component {
 				if(groupedListItems[allCategories[i]].length > 1) {
 					//console.log(groupedListItems[allCategories[i]]);
 					multItemsInCat.push(
-						<li key={i} className="categorizedList__category">
-							<span>{allCategories[i]}</span>
-							<ul className="categorizedList__categoryUL">
+						<ListItem key={i} className={classes.listItem}>
+							<ListItemText className={classes.listText} primary={allCategories[i]}/>
+							<List className={classes.subList}>
 								{groupedListItems[allCategories[i]].map((item, index)=>{
 									return(
-										<li key={item.id} className="categorizedList__item">
-											<input type="checkbox" defaultChecked={item.checked} id={`${item.item.trim().replace(/\s/g, '')}${index}`}/>
-											<label htmlFor={`${item.item.trim().replace(/\s/g, '')}${index}`}>{item.item}</label>
-										</li>
+										<ListItem key={item.id}>
+											<FormControlLabel
+												classes={{label: classes.label}}
+												control={
+													<Checkbox
+														color="primary"
+														defaultChecked={item.checked}
+														classes={{checked: classes.checked}}
+													/>
+												}
+												label={item.item}
+											/>
+										</ListItem>
 									);
 								})}
-							</ul>
-						</li>
+							</List>
+						</ListItem>
 					);
 				}
 			}
@@ -82,33 +112,36 @@ class CategorizedList extends React.Component {
 			for(let i = 0; i < allCategories.length; i++) {
 				if(groupedListItems[allCategories[i]].length === 1) {
 					singleItemInCat.push(
-						<li key={i} className="categorizedList__category">
-							<span>{allCategories[i]}</span>
-							<ul className="categorizedList__categoryUL">
-								<li key={groupedListItems[allCategories[i]][0].id} className="categorizedList__item">
-									<input
-										type="checkbox"
-										defaultChecked={groupedListItems[allCategories[i]][0].checked}
-										id={`${groupedListItems[allCategories[i]][0].item.trim().replace(/\s/g, '')}${i}`}
+						<ListItem key={i} className={classes.listItem}>
+							<ListItemText className={classes.listText} primary={allCategories[i]} />
+							<List className={classes.subList}>
+								<ListItem key={groupedListItems[allCategories[i]][0].id}>
+									<FormControlLabel
+										classes={{label: classes.label}}
+										control={
+											<Checkbox
+												color="primary"
+												defaultChecked={groupedListItems[allCategories[i]][0].checked}
+												classes={{checked: classes.checked}}
+											/>
+										}
+										label={groupedListItems[allCategories[i]][0].item}
 									/>
-									<label
-										htmlFor={`${groupedListItems[allCategories[i]][0].item.trim().replace(/\s/g, '')}${i}`}
-									>
-										{groupedListItems[allCategories[i]][0].item}
-									</label>
-								</li>
-							</ul>
-						</li>
+								</ListItem>
+							</List>
+						</ListItem>
 					);
 				}
 			}
 			return (
 				<div>
 					<h3>{template} List</h3>
-					<ul className="categorizedList">
-						{multItemsInCat}
-						{singleItemInCat}
-					</ul>
+					<FormGroup>
+						<List>
+							{multItemsInCat}
+							{singleItemInCat}
+						</List>
+					</FormGroup>
 					<div className={classes.btnContainer}>
 						<Button
 							className={classes.button}
@@ -122,7 +155,7 @@ class CategorizedList extends React.Component {
 							className={classes.button}
 							variant="contained"
 							color="secondary"
-							// onClick={() => deleteToDoList()}
+							onClick={() => deleteCategorizedList()}
 						>
 							Trash List
 						</Button>
@@ -143,5 +176,6 @@ export default withStyles(styles)(CategorizedList);
 CategorizedList.propTypes = {
   categorizedListItems: PropTypes.array.isRequired,
   template: PropTypes.string.isRequired,
+  deleteCategorizedList: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired
 }

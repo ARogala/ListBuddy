@@ -29,8 +29,6 @@ const styles = theme => ({
   }
 });
 
-
-
 class ToDoList extends React.Component {
 	constructor(props) {
 	    super(props);
@@ -65,7 +63,7 @@ class ToDoList extends React.Component {
 			<div>
 				<h3>To Do List</h3>
 				<FormGroup>
-					<RootRef rootRef={this.toDoList} >
+					<RootRef rootRef={this.toDoList}>
 						<List>
 							{toDoItems}
 						</List>

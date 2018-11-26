@@ -3,10 +3,32 @@ import PropTypes from 'prop-types';
 
 import groupBy from './groupBy.js';
 
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  btnContainer: {
+  	textAlign: 'center'
+  },
+  checked: {
+	'& + $label': {
+		fontWeight: 'normal',
+	  	textDecoration: 'line-through'
+	},
+  },
+  label : {
+  	fontWeight: 'bold'
+  }
+});
+
 class CategorizedList extends React.Component {
 	render() {
-		const template = this.props.template;
-		const listItems = this.props.categorizedListItems;
+		const { classes } = this.props;
+		const template    = this.props.template;
+		const listItems   = this.props.categorizedListItems;
 		let categorizedListItems = groupBy(listItems, 'template');
 
 		let renderLogic = false;
@@ -87,6 +109,24 @@ class CategorizedList extends React.Component {
 						{multItemsInCat}
 						{singleItemInCat}
 					</ul>
+					<div className={classes.btnContainer}>
+						<Button
+							className={classes.button}
+							variant="contained"
+							color="primary"
+							// onClick={() => saveToDoListProgress(this.toDoList.current.childNodes)}
+						>
+							Save Progress
+						</Button>
+						<Button
+							className={classes.button}
+							variant="contained"
+							color="secondary"
+							// onClick={() => deleteToDoList()}
+						>
+							Trash List
+						</Button>
+					</div>
 				</div>
 			);
 		}
@@ -98,9 +138,10 @@ class CategorizedList extends React.Component {
 	}
 }
 
-export default CategorizedList;
+export default withStyles(styles)(CategorizedList);
 
 CategorizedList.propTypes = {
   categorizedListItems: PropTypes.array.isRequired,
-  template: PropTypes.string.isRequired
+  template: PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired
 }

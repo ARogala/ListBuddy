@@ -123,11 +123,20 @@ class App extends React.Component {
   }
 
   saveCategorizedListProgress(categorizedListRef) {
-    // console.log(categorizedListRef);
+    //console.log(categorizedListRef);
     // console.log(categorizedListRef[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[1].checked);
     const categorizedListItems = this.state.categorizedListItems;
     for(let i = 0; i < categorizedListRef.length; i++) {
-      categorizedListItems[i].checked = categorizedListRef[i].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[1].checked;
+      //console.log(categorizedListRef[i].childNodes[1].childNodes.length);
+      for(let j = 0; j < categorizedListRef[i].childNodes[1].childNodes.length; j++) {
+        const id = parseInt(categorizedListRef[i].childNodes[1].childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[1].value);
+        const checked = categorizedListRef[i].childNodes[1].childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[1].checked;
+        for(let k = 0; k < categorizedListItems.length; k++) {
+          if(categorizedListItems[k].id === id) {
+            categorizedListItems[k].checked = checked;
+          }
+        }
+      }
     }
     localStorage.setItem('categorizedListItems', JSON.stringify(categorizedListItems));
     this.setState({categorizedListItems: categorizedListItems});

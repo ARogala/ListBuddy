@@ -100,6 +100,7 @@ class CategorizedList extends React.Component {
 														color="primary"
 														defaultChecked={item.checked}
 														classes={{checked: classes.checked}}
+														value={Number(item.id).toString()}
 													/>
 												}
 												label={item.item}
@@ -129,6 +130,7 @@ class CategorizedList extends React.Component {
 												color="primary"
 												defaultChecked={groupedListItems[allCategories[i]][0].checked}
 												classes={{checked: classes.checked}}
+												value={Number(groupedListItems[allCategories[i]][0].id).toString()}
 											/>
 										}
 										label={groupedListItems[allCategories[i]][0].item}

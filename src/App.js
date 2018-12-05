@@ -136,8 +136,13 @@ class App extends React.Component {
   deleteCategorizedList() {
     const result = window.confirm("Do you really want to delete your list?");
     if(result === true) {
-      this.setState({categorizedListItems: []});
-      localStorage.removeItem('categorizedListItems');
+      const categorizedListItems = this.state.categorizedListItems;
+      const template = this.state.template;
+
+      const newCategorizedListItems = categorizedListItems.filter(item => item.template !== template);
+
+      this.setState({categorizedListItems: newCategorizedListItems});
+      localStorage.setItem('categorizedListItems', JSON.stringify(newCategorizedListItems));
     }
   }
 

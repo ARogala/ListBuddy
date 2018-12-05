@@ -41,8 +41,7 @@ class App extends React.Component {
     this.state = {
       toDoListItems: JSON.parse(localStorage.getItem('toDoListItems') || '[]'),
       toDoItem: '',
-      template: 'To Do',
-      //template: JSON.parse(localStorage.getItem('template') || '["To Do"]'),
+      template: JSON.parse(localStorage.getItem('template') || '"To Do"'),
       categorizedListItems: JSON.parse(localStorage.getItem('categorizedListItems') || '[]')
     };
   }
@@ -96,12 +95,12 @@ class App extends React.Component {
   //categorized list methods
   updateTemplate(template) {
     //console.log(template);
-    //localStorage.setItem('template', JSON.stringify(template));
     if(template === 'Choose a Template') {
       alert('Please Choose a Template');
       return;
     }
     this.setState({template: template});
+    localStorage.setItem('template', JSON.stringify(template));
   }
 
   saveCategorizedListItem(item, category) {

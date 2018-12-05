@@ -44,11 +44,17 @@ const styles = theme => ({
 });
 
 class CategorizedList extends React.Component {
+	constructor(props) {
+	    super(props);
+	    this.categorizedList = React.createRef();
+  	}
+
 	render() {
-		const { classes }           = this.props;
-		const template              = this.props.template;
-		const listItems             = this.props.categorizedListItems;
-		const deleteCategorizedList = this.props.deleteCategorizedList;
+		const { classes }                 = this.props;
+		const template                    = this.props.template;
+		const listItems                   = this.props.categorizedListItems;
+		const deleteCategorizedList       = this.props.deleteCategorizedList;
+		const saveCategorizedListProgress = this.props.saveCategorizedListProgress;
 
 		let categorizedListItems = groupBy(listItems, 'template');
 
@@ -137,17 +143,19 @@ class CategorizedList extends React.Component {
 				<div>
 					<h3>{template} List</h3>
 					<FormGroup>
-						<List>
-							{multItemsInCat}
-							{singleItemInCat}
-						</List>
+						<RootRef rootRef={this.categorizedList}>
+							<List>
+								{multItemsInCat}
+								{singleItemInCat}
+							</List>
+						</RootRef>
 					</FormGroup>
 					<div className={classes.btnContainer}>
 						<Button
 							className={classes.button}
 							variant="contained"
 							color="primary"
-							// onClick={() => saveToDoListProgress(this.toDoList.current.childNodes)}
+							onClick={() => saveCategorizedListProgress(this.categorizedList.current.childNodes)}
 						>
 							Save Progress
 						</Button>
@@ -177,5 +185,6 @@ CategorizedList.propTypes = {
   categorizedListItems: PropTypes.array.isRequired,
   template: PropTypes.string.isRequired,
   deleteCategorizedList: PropTypes.func.isRequired,
+  saveCategorizedListProgress: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired
 }

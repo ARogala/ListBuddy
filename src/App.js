@@ -86,8 +86,8 @@ class App extends React.Component {
   }
 
   saveToDoListProgress(toDoListRef) {
-    // console.log(toDoListRef);
-    // console.log(toDoListRef[0].childNodes[0].childNodes[0].childNodes[0].childNodes[1]);
+    //console.log(toDoListRef);
+    //console.log(toDoListRef[0].childNodes[0].childNodes[0].childNodes[0].childNodes[1]);
     const toDoListItems = this.state.toDoListItems;
     for(let i = 0; i < toDoListRef.length; i++) {
       toDoListItems[i].checked = toDoListRef[i].childNodes[0].childNodes[0].childNodes[0].childNodes[1].checked;

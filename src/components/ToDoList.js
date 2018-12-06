@@ -100,6 +100,3 @@ ToDoList.propTypes = {
   deleteToDoList: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired
 }
-
-// <label htmlFor={`${item.toDoItem.trim().replace(/\s/g, '')}${index}`}>{item.toDoItem}</label>
-//id={`${item.toDoItem.trim().replace(/\s/g, '')}${index}`}

@@ -126,16 +126,29 @@ class App extends React.Component {
     this.setState({categorizedListItems: categorizedListItems});
   }
 
+  /*consider optimizing this algorithm.
+    Loop through the categorized list
+    Loop through the categorized list child nodes (indidvidual list items)
+    get each list items id and current checked state
+    if the list items id matches the list items id in storage update the checked state
+    finally update state and local storage
+  */
   saveCategorizedListProgress(categorizedListRef) {
     //console.log(categorizedListRef);
-    // console.log(categorizedListRef[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[1].checked);
-    const categorizedListItems = this.state.categorizedListItems;
-    for(let i = 0; i < categorizedListRef.length; i++) {
+    //console.log(categorizedListRef[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[0].childNodes[1].checked);
+    const categorizedListItems              = this.state.categorizedListItems;
+    const categorizedListRefLength          = categorizedListRef.length;
+    const categorizedListItemsLength        = categorizedListItems.length;
+
+    for(let i = 0; i < categorizedListRefLength; i++) {
       //console.log(categorizedListRef[i].childNodes[1].childNodes.length);
-      for(let j = 0; j < categorizedListRef[i].childNodes[1].childNodes.length; j++) {
+      const categorizedListRefChildNodeLength = categorizedListRef[i].childNodes[1].childNodes.length;
+
+      for(let j = 0; j < categorizedListRefChildNodeLength; j++) {
         const id = parseInt(categorizedListRef[i].childNodes[1].childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[1].value);
         const checked = categorizedListRef[i].childNodes[1].childNodes[j].childNodes[0].childNodes[0].childNodes[0].childNodes[1].checked;
-        for(let k = 0; k < categorizedListItems.length; k++) {
+
+        for(let k = 0; k < categorizedListItemsLength; k++) {
           if(categorizedListItems[k].id === id) {
             categorizedListItems[k].checked = checked;
           }

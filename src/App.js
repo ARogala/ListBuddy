@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Navigation from './components/Navigation';
+//components
 import ToDoListInput from './components/ToDoListInput';
 import ToDoList from './components/ToDoList';
 
@@ -28,6 +28,10 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing.unit * 2,
     color: theme.palette.text.secondary,
+    minHeight: '100vh'
+  },
+  header: {
+    textAlign: 'center',
   },
   footer: {
     textAlign: 'center',
@@ -164,11 +168,10 @@ class App extends React.Component {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <CssBaseline />
-            <Navigation />
-            <header className="header">
-              <div className="header__container">
-                <img src={list} className="header__logo" alt="logo" />
-                <h1 className="header__title">List Buddy</h1>
+            <header className={classes.header}>
+              <div>
+                <img src={list} alt="logo" />
+                <h1>List Buddy</h1>
               </div>
             </header>
             <section>

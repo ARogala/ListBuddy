@@ -1,5 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## List Buddy
+I built ListBuddy as a fun way to take a tour in Material UI and learn Redux.
+I figured if I wanted to learn Redux and some Material UI I may as well make something I will use.
+The little app works great for Packing and Grocery lists. No more fumbling around the grocery store
+with a pen and paper.
+It is the classic list app but I used local storage to keep the lists persistent and added some categorized templates.
+Although I like the use of local storage for little apps like this, ListBuddy will be the last one I write this way for a while.
+I need to move onto some more full stack applications. Time for NodeJS, SQL, MVC ect..
+
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -37,8 +47,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

@@ -76,8 +76,18 @@ class CategorizedListItemForm extends React.Component {
 						<option value="Meat">Meat</option>
 						<option value="Dairy">Dairy</option>
 						<option value="Canned">Canned</option>
+						<option value="Pantry">Pantry</option>
+						<option value="Snacks">Snacks</option>
+						<option value="Bakery">Bakery</option>
+						<option value="Beverages">Beverages</option>
+						<option value="Paper Goods">Paper Goods</option>
+						<option value="Personal Care">Personal Care</option>
+						<option value="Cleaners">Cleaners</option>
+						<option value="Household">Household</option>
+						<option value="Toiletry">Toiletry</option>
 						<option value="Frozen">Frozen</option>
 						<option value="Dry/Baking">Dry/Baking</option>
+						<option value="Other">Other</option>
 					</NativeSelect>
 				</FormControl>
  			);
@@ -93,12 +103,17 @@ class CategorizedListItemForm extends React.Component {
 					>
 						<option value="--Please Select an Item Category--" disabled>--Please Select an Item Category--</option>
 						<option value="Clothes">Clothes</option>
-						<option value="Medicine/First Aid">Medicine/First Aid</option>
-						<option value="Technology">Technology</option>
-						<option value="Miscellaneous">Miscellaneous</option>
-						<option value="Camping/Hiking">Camping/Hiking</option>
 						<option value="Toiletry">Toiletry</option>
 						<option value="Food">Food</option>
+						<option value="Beverages">Beverages</option>
+						<option value="Travel Docs and Money">Travel Docs and Money</option>
+						<option value="Medicine/First Aid">Medicine/First Aid</option>
+						<option value="Technology">Technology</option>
+						<option value="Camping/Hiking Gear">Camping/Hiking Gear</option>
+						<option value="Car Maintenance and Safety">Car Maintenance and Safety</option>
+						<option value="Miscellaneous">Miscellaneous</option>
+						<option value="Entertainment">Entertainment</option>
+						<option value="Other">Other</option>
 					</NativeSelect>
 				</FormControl>
 			);

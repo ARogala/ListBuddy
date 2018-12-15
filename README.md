@@ -1,17 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## List Buddy
-I built ListBuddy as a fun way to take a tour in Material UI and learn Redux.
-I figured if I wanted to learn Redux and some Material UI I may as well make something I will use.
-The little app works great for Packing and Grocery lists. No more fumbling around the grocery store
-with a pen and paper.
 
-It is the classic list app but I used local storage to keep the lists persistent and added some categorized templates.
-Although I like the use of local storage for little apps like this, ListBuddy will be the last one I write this way for a while.
-I need to move onto some more full stack applications. Time for NodeJS, SQL, MVC ect..
-
-
-Check out the app: https://listbuddy.surge.sh
+see https://github.com/ARogala/list-buddy-redux for the up to date list app.
 
 ## Available Scripts
 
